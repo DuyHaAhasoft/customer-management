@@ -1,0 +1,65 @@
+.form-add-customer {
+    padding: 10px;
+    form {
+        height: 100%;
+        * {
+            margin: 5px 0px;
+        }
+        fieldset {
+            width: calc(50% - 20px);
+            height: 100px;
+            float: left;
+            margin: 5px 10px;
+        }
+        label {
+            width: 100%;
+            span {
+                color: red;;
+            }
+        }
+        small {
+            color: red;
+        }
+    }
+    .form {
+        .form__groupBtn {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 10px;
+            * {
+                width: 100px;
+            }
+            .groupBtn__btn {
+                &--disabled {
+                    cursor: no-drop;
+                }
+            }
+            :nth-child(2) {
+                height: 38px;
+                margin-top: 10px;;
+            }
+        }
+        input {
+            text-align: center;
+        }
+        select {
+            width: 100%;
+            text-align: center;
+            height: 37px;
+            border-radius: 0.25rem;
+            border: 1px solid #ced4da;
+            cursor: pointer;
+        }
+        .input-number--no-arrow::-webkit-outer-spin-button,
+        .input-number--no-arrow::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+}
+// customize class disabled button bootstrap
+.btn.disabled {
+    opacity: 0.65;
+    pointer-events: auto;
+}

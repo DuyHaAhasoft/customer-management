@@ -1,0 +1,49 @@
+.list-customers {
+    position: relative;
+    .list-customers__confirmDelete {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: calc(100% + 10px);
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 25px;
+        z-index: 1;
+        strong {
+            color: blue;
+        }
+        .confirmDelete__box {
+            .box__groupBtn {
+                * {
+                    margin: 0px 10px;
+                }
+            }
+        } 
+    }
+    .list-customers__btnAdd {
+        float: right;
+        margin: 0 10px 10px 0;
+        width: 100px;
+        a {
+            text-decoration: none;
+        }
+    }
+    .list-customers__table {
+        width: calc(100% - 20px);
+        margin: 10px;
+        .table__groupBtn {
+            :last-child {
+                margin-left: 10px;
+            }
+        }
+    }
+    table {
+        .input__address {
+            white-space: nowrap;  
+            overflow: hidden;
+            text-overflow: ellipsis; 
+            max-width: 150px;
+        }
+    }
+}
