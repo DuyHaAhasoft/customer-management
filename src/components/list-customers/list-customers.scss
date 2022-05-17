@@ -1,49 +1,65 @@
-.list-customers {
-    position: relative;
-    .list-customers__confirmDelete {
-        position: absolute;
+.list-customers-page {
+    width: 100%;
+    padding: 20px;
+    margin: 0px auto;
+    max-width: 1024px;
+    background-color: #fff;
+
+    .list-customers-page__header {
         display: flex;
-        justify-content: center;
         align-items: center;
-        width: 100%;
-        height: calc(100% + 10px);
-        background-color: rgba(0, 0, 0, 0.3);
-        border-radius: 25px;
-        z-index: 1;
-        strong {
-            color: blue;
+        margin-bottom: 20px;
+
+        .list-customers-page__title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0px auto 0px 0px;
         }
-        .confirmDelete__box {
-            .box__groupBtn {
-                * {
-                    margin: 0px 10px;
+
+        .list-customers-page__btn {
+            margin-left: 15px;
+        }
+    }
+
+    .list-customers-page__body {
+        .table.list-customers__table {
+            width: 100%;
+            border-collapse: unset;
+            border-spacing: 0px;
+
+            th, td {
+                font-size: 14px;
+                padding: 5px 10px;
+                vertical-align: middle;
+            }
+
+            thead {
+                tr {
+                    th {
+                        border: 0px;
+                        padding: 10px;
+                        font-weight: bold;
+                        background-color: rgba(240, 240, 240, 1)
+                    }
                 }
             }
-        } 
-    }
-    .list-customers__btnAdd {
-        float: right;
-        margin: 0 10px 10px 0;
-        width: 100px;
-        a {
-            text-decoration: none;
-        }
-    }
-    .list-customers__table {
-        width: calc(100% - 20px);
-        margin: 10px;
-        .table__groupBtn {
-            :last-child {
-                margin-left: 10px;
+
+            tbody {
+                tr {
+                    td {
+                        border-bottom: 1px solid rgba(240, 240, 240, 1);
+                    }
+                }
+            }
+
+            .table__table-data {
+                button {
+                    font-size: 14px;
+                    padding: 2px 10px;
+                    font-weight: bold;
+                    margin-right: 5px;
+                }
             }
         }
-    }
-    table {
-        .input__address {
-            white-space: nowrap;  
-            overflow: hidden;
-            text-overflow: ellipsis; 
-            max-width: 150px;
-        }
-    }
+    }  
 }

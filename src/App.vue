@@ -1,8 +1,6 @@
 <template>
-  <div id="app" class="container-fluid">
-    <div class="border border-5 border-radius">
-      <router-view></router-view>
-    </div>
+  <div id="app">
+    <router-view></router-view>
   </div>
 </template>
 
@@ -14,13 +12,16 @@ export default {
 </script>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+
+  padding: 20px;
+  min-height: 100vh;
+  background-color: rgb(240, 240, 240);
 }
 .border-radius {
   border-radius: 25px;
