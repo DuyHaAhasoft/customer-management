@@ -198,7 +198,7 @@ export default {
     methods: {
         async onSubmit() {
             // event.preventDefault();
-            if(this.nameForm === "Add") {
+            if(this.nameForm === "Add" && !this.disableAdd) {
               const date = new Date();
               this.infoCustomer.createdDateTimeString = date.toISOString();
               const res = await axios.post('https://ahasoft-sample-apis.azurewebsites.net/Customer', this.infoCustomer);
@@ -207,7 +207,8 @@ export default {
               }  else {
                   alert(res.message);
               }
-            } else {
+            } 
+            if(this.nameForm === "Edit" && !this.disableAdd) {
               const res = await axios.put('https://ahasoft-sample-apis.azurewebsites.net/Customer', this.infoCustomer);
               if(res.status === 200) {
                 this.$router.push('/')

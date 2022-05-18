@@ -20,45 +20,24 @@
           Import excel
         </b-button>
       </div>
-
-      <div class="list-customers-page__body">
         <!-- <info-customer class="list-customers list-customers__info-customer" /> -->
-        <table class="table list-customers__table">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Name</th>
-              <th scope="col">Address</th>
-              <th scope="col">Balance</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="(customer, index) in customers"
-              :key="index"
-            >
-              <td class="table__table-data" scope="row">{{ customer.id }}</td>
-              <td class="table__table-data">{{ customer.name }}</td>
-              <td class="table__table-data">{{ customer.address }}</td>
-              <td class="table__table-data">{{ customer.balance }}</td>
-              <td class="table__table-data">
-                <b-button variant="info">Info</b-button>
-                <router-link :to="{name: 'edit-customer', params: {id: customer.id}}">
-                  <b-button variant="outline-primary">
-                    Edit
-                  </b-button>
-                </router-link>
-                <b-button variant="danger" @click="handleDeleteCustomerClick(customer.id)">
-                  Delete
-                </b-button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        
       <div class="list-customers-page__body">
-        <table-view :fields="dataTable.fields" :data="dataTable.data" :buttons="dataTable.buttons" v-if="dataTable.data"/>
+        <table-view 
+          v-if="dataTable.data"
+          :data="dataTable.data" 
+          :fields="dataTable.fields" 
+          :action="dataTable.action" 
+          @delete="handleDeleteCustomerClick"  
+        >
+          <template #address="row">
+            <span>Address: {{ row.address }}</span>
+          </template>
+
+          <template #balance="row">
+            {{ formatBalance(row.balance) }}
+          </template>
+        </table-view>
       </div>
 
       <div class="list-customers-page__footer">
@@ -78,6 +57,8 @@
 </template>
 
 <script>
+// vue slot 
+
 // Utilities
 import axios from "axios";
 
@@ -96,21 +77,21 @@ export default {
       },
       dataTable: {
         data: [],
-        buttons: {
+        action: {
           view: {
-            text: "info",
+            text: "Info",
             isShow: true
           },
           edit: {
             field: "id",
-            text: "edit",
+            text: "Edit",
             isShow: true,
             routeName: "edit-customer"
           },
           delete: {
-            fiel: "id",
+            field: "id",
             isShow: true,
-            text: "delete",
+            text: "Delete",
           }
         },
         fields: {
@@ -134,34 +115,37 @@ export default {
     handleDeleteCustomerClick(idCustomer) {
 		this.confirmDelete.idCustomer = idCustomer;
 		this.confirmDelete.status = true;
-	},
+    },
     handleCancelDeleteClick() {
 		this.confirmDelete.idCustomer = 0;
 		this.confirmDelete.status = false;
-	},
-	async handleConfirmDeleteClick() {
-		// this.deleteProduct(this.confirmDelete.idCustomer);
-		try {
-			const res = await axios.delete(`https://ahasoft-sample-apis.azurewebsites.net/Customer?id=${this.confirmDelete.idCustomer}`)
+    },
+    async handleConfirmDeleteClick() {
+      // this.deleteProduct(this.confirmDelete.idCustomer);
+      try {
+        const res = await axios.delete(`https://ahasoft-sample-apis.azurewebsites.net/Customer?id=${this.confirmDelete.idCustomer}`)
 
-			if (res.status !== 200) {
-				throw res.message
-			}
+        if (res.status !== 200) {
+          throw res.message
+        }
 
-			this.confirmDelete.idCustomer = 0;
-			this.confirmDelete.status = false;
+        this.confirmDelete.idCustomer = 0;
+        this.confirmDelete.status = false;
 
-			this.loadCustomers()
-		} catch(error) {
-			alert(error);
-		}
-	},
+        this.loadCustomers()
+      } catch(error) {
+        alert(error);
+      }
+    },
 
-	async loadCustomers() {
-		const res = await axios.get('https://ahasoft-sample-apis.azurewebsites.net/Customer');
-		this.customers = res.data;
-    this.dataTable.data = res.data;
-	}
+    async loadCustomers() {
+      const res = await axios.get('https://ahasoft-sample-apis.azurewebsites.net/Customer');
+      this.customers = res.data;
+      this.dataTable.data = res.data;
+    },
+    formatBalance(balance) {
+      return `${balance * 2} VND`
+    }
   }
 }
 </script>

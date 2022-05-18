@@ -8,18 +8,32 @@
         </thead>
         <tbody>
             <tr v-for="element in data" :key="element.id">
-                <td v-for="field in fields" :key="field.text">{{element[`${field.text.toLowerCase()}`]}}</td>
+                <td 
+                    :key="index"
+                    class="table__table-data" 
+                    v-for="(field, index) in Object.keys(fields)" 
+                >
+                    <slot name="address"></slot>
+                    {{ element[field] }}
+                </td>
+
                 <td class="table__table-data">
-                <b-button variant="info">Info</b-button>
-                <router-link :to="{name: 'edit-customer', params: {id: element.id}}">
-                  <b-button variant="outline-primary">
-                    Edit
-                  </b-button>
-                </router-link>
-                <b-button variant="danger" @click="handleDeleteCustomerClick(element.id)">
-                  Delete
-                </b-button>
-              </td>
+                    <button v-if="action.view.isShow" class="table-data__btn table-data__btn--view">{{action.view.text}}</button>
+
+                    <router-link :to="{name: action.edit.routeName, params: {id: action.edit.field}}">
+                        <button v-if="action.edit.isShow" class="table-data__btn table-data__btn--edit">
+                            {{ action.edit.text }}
+                        </button>
+                    </router-link>
+
+                    <button 
+                        v-if="action.delete.isShow" 
+                        class="table-data__btn table-data__btn--delete"
+                        @click="$emit('delete', element[action.delete.field])" 
+                    >
+                        {{ action.delete.text }}
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -30,32 +44,36 @@ export default {
     data() {
         return {}
     },
+    mounted() {
+        //element[`${field.text.toLowerCase()}`]
+        console.log("fields", Object.keys(this.fields));
+    },
     props: {
         fields: {
             type: Object,
+            require: true,
             default: function () {
                 return {}
             },
-            require: true,
         },
         data: {
             type: Array,
+            require: true,
             default: function () {
                 return []
             },
-            require: true,
         },
-        buttons: {
+        action: {
             type: Object,
             default:  function () {
                 return {
-                    view: {text: "", isShow: false},
-                    edit: {text: "", field: "", routeName: "", isShow: false},
-                    delete: {text: "", field: "", isShow: false}
+                    view: {text: "Info", isShow: true},
+                    delete: {text: "", field: "", isShow: false},
+                    edit: {text: "Edit", field: "", routeName: "", isShow: true},
                 }
             }
         }
-    }
+    },
 }
 </script>
 
