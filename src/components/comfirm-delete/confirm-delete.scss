@@ -6,6 +6,7 @@
     height: 100%;
     z-index: 1000;
     position: fixed;
+    
 
     &:before {
         top: 0px;
@@ -29,6 +30,17 @@
         background-color: #fff;
         transform: translate(-50%, -50%);
         box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.3);
+        animation: showConfirmDelete 1.5s;
+
+        @keyframes showConfirmDelete {
+            0% {
+                top: 0%
+            }
+
+            100% {
+                top: 50%
+            }
+        }
 
         .confirm-delete__body {
             .confirm-delete__title {

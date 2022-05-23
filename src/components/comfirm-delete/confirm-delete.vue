@@ -1,6 +1,6 @@
 <template>
     <div v-if="show" class="confirm-delete">
-        <div class="box confirm-delete__box">
+        <div :class="[{active: show}]" class="box confirm-delete__box">
             <div class="confirm-delete__body">
                 <h4 class="confirm-delete__title">CONFIRM</h4>
 

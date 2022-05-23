@@ -88,5 +88,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./table-view.scss";
+@import "./table-view-modal.scss";
 </style>

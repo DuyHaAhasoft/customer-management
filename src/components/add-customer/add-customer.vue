@@ -151,7 +151,7 @@ export default {
     data() {
         return {
           nameForm: "Add",
-          cunstomer: null,
+          customer: null,
           infoCustomer: Object.assign({}, DEFAULT_CUSTOMER),
           disableAdd: true,
         }
@@ -225,7 +225,7 @@ export default {
             e.preventDefault();
             this.$router.push('/');
         }
-  }
+    }
 }
 </script>
 

@@ -1,6 +1,7 @@
 const actions = {
-    async customers () {
-        // commit('getMetadata', await getMetadata());
+    async customers({commit}) {
+        console.log("actions");
+        commit('getDataCustomer')
     }
 }
 

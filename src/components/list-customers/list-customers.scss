@@ -24,8 +24,8 @@
     .list-customers-page__body {
         .table.list-customers__table {
             width: 100%;
-            border-collapse: unset;
             border-spacing: 0px;
+            border-collapse: unset;
 
             th, td {
                 font-size: 14px;
@@ -61,5 +61,9 @@
                 }
             }
         }
-    }  
+    }
+    .list-customers__confirm-delete {
+        // animation: showConfirmDelete 1s;
+        height: 100%;
+    }
 }
